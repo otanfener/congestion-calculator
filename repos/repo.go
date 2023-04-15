@@ -2,7 +2,6 @@ package repos
 
 import (
 	"context"
-	"fmt"
 	"github.com/otanfener/congestion-controller/pkg/db"
 	"github.com/otanfener/congestion-controller/pkg/domain"
 	"github.com/otanfener/congestion-controller/pkg/models"
@@ -22,7 +21,6 @@ func New(database *db.DB, collection string) *Repo {
 
 func (r *Repo) GetCity(ctx context.Context, city string) (models.City, error) {
 	collection := r.db.Collection(r.collection)
-	fmt.Printf("received city:%s\n", city)
 	res := collection.FindOne(ctx, bson.M{"name": city})
 	switch {
 	case res.Err() == mongo.ErrNoDocuments:

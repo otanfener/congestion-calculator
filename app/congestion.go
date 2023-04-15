@@ -28,26 +28,25 @@ func (api *API) CalculateTax() http.HandlerFunc {
 
 		err := json.NewDecoder(request.Body).Decode(&params.Body)
 		if err != nil {
-			render.Render(writer, request, responses.ErrBadRequest())
+			_ = render.Render(writer, request, responses.ErrBadRequest())
 			return
 		}
 		err = api.validator.Struct(params)
 		if err != nil {
-			render.Render(writer, request, responses.ErrBadRequest())
+			_ = render.Render(writer, request, responses.ErrBadRequest())
 			return
 		}
 
 		res, err := api.congestionService.CalculateTax(ctx, params.Body.Times, params.Body.City, params.Body.VehicleType)
 
 		if errors.Is(err, domain.ErrNotFound) {
-			render.Render(writer, request, responses.ErrNotFound())
+			_ = render.Render(writer, request, responses.ErrNotFound())
 			return
 		} else if err != nil {
-			render.Render(writer, request, responses.ErrInternal())
+			_ = render.Render(writer, request, responses.ErrInternal())
 			return
 		}
 		resp := responses.CongestionResponse{Tax: res}
-		render.Render(writer, request, resp)
-		return
+		_ = render.Render(writer, request, resp)
 	}
 }

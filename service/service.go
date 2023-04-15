@@ -28,7 +28,7 @@ func New(repo Repo) *Service {
 
 func (srv *Service) CalculateTax(ctx context.Context, dates []models.CivilTime, city string, vehicle string) (models.Tax, error) {
 
-	if dates == nil || len(dates) == 0 {
+	if dates == nil {
 		return models.Tax{
 			TotalFee: 0,
 			History:  nil,
@@ -120,7 +120,7 @@ func isVisited(times []time.Time, t time.Time) bool {
 }
 func getTollFeeByTariffAndDate(date models.CivilTime, tariffs []models.Tariff) int {
 	totalFee := 0
-	if tariffs == nil || len(tariffs) == 0 {
+	if len(tariffs) == 0 {
 		return totalFee
 	}
 
@@ -145,11 +145,11 @@ func isInTimeRange(date time.Time, start time.Time, end time.Time) bool {
 }
 
 func isTollFreeVehicle(vehicle string, exemptVehicles []string) bool {
-	if len(exemptVehicles) == 0 || exemptVehicles == nil {
+	if len(exemptVehicles) == 0 {
 		return false
 	}
 	for _, e := range exemptVehicles {
-		if strings.ToLower(vehicle) == strings.ToLower(e) {
+		if strings.EqualFold(vehicle, e) {
 			return true
 		}
 	}
@@ -166,13 +166,13 @@ func isTollFreeDate(date time.Time, rules models.Rules) bool {
 		}
 	}
 	for _, m := range rules.ChargeFreeMonths {
-		if strings.ToLower(date.Month().String()) == strings.ToLower(m) {
+		if strings.EqualFold(date.Month().String(), strings.ToLower(m)) {
 			return true
 		}
 	}
 	for _, w := range rules.WorkingDays {
 		fmt.Print(date.Weekday().String())
-		if strings.ToLower(date.Weekday().String()) == strings.ToLower(w) {
+		if strings.EqualFold(date.Weekday().String(), strings.ToLower(w)) {
 			return false
 		}
 	}
