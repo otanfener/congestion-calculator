@@ -26,6 +26,8 @@ It has the following commands:
 - `make up`: will run all services defined in `docker-compose.yml`. It will also import example dataset under `data` directory to `MongoDB`
 - `make tools`: will download tooling binary used in application, and place them under `bin` folder.
 - `make lint`: will lint application using `golangci-lint` tool.
+
+Please make sure that Docker deamon is up and running.
 ### Postman Collection
 Example postman collection can be found under `docs` folder. It can be directly imported to Postman.
 
