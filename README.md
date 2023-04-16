@@ -1,6 +1,8 @@
 # Congestion Tax Calculator
 
 The aim of this project is to write a program that calculates congestion tax based on the given [requirements](docs/ASSIGMENT.md).
+
+For assumptions and questions made during the scope of this project please see [questions](docs/QUESTIONS.md)
 ## Design
 ### Database Design
 
@@ -24,11 +26,11 @@ The provided `Makefile` will handle all the heavy lifting, and provide automated
 It has the following commands:
 - `make build`: will create docker image for congestion calculator.
 - `make up`: will run all services defined in `docker-compose.yml`. It will also import example dataset under `data` directory to `MongoDB`
+- `make down`: will stop all services and cleanup. 
 - `make tools`: will download tooling binary used in application, and place them under `bin` folder.
 - `make lint`: will lint application using `golangci-lint` tool.
 
-Please make sure that Docker deamon is up and running.
+Please make sure that Docker daemon is up and running.
 ### Postman Collection
 Example postman collection can be found under `docs` folder. It can be directly imported to Postman.
-
 

@@ -4,9 +4,11 @@ COMPOSE_FILE := docker-compose.yml
 build:
 	docker-compose -f $(COMPOSE_FILE) build
 .PHONY: up
-# Start the Docker Compose services in the background
 up:
 	docker-compose -f $(COMPOSE_FILE) up -d
+.PHONY: down
+down:
+	docker-compose down --volumes --remove-orphans
 .PHONY: tools
 tools:
 	go install -C internal/tools \
