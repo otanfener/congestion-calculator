@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"github.com/otanfener/congestion-controller/pkg/domain"
 	"github.com/otanfener/congestion-controller/pkg/models"
 	"sort"
@@ -15,6 +14,7 @@ type Service struct {
 	repo Repo
 }
 
+//go:generate moq -out repo_mock.go . Repo
 type Repo interface {
 	GetCity(ctx context.Context, city string) (models.City, error)
 }
@@ -130,7 +130,7 @@ func getTollFeeByTariffAndDate(date models.CivilTime, tariffs []models.Tariff) i
 		hourTo, _ := strconv.Atoi(strings.Split(tariff.To, ":")[0])
 		minuteTo, _ := strconv.Atoi(strings.Split(tariff.To, ":")[1])
 
-		fromTime := time.Date(date.Year(), date.Month(), date.Day(), hourFrom, minuteFrom, 59, date.Nanosecond(), date.Location())
+		fromTime := time.Date(date.Year(), date.Month(), date.Day(), hourFrom, minuteFrom, 0, date.Nanosecond()-1, date.Location())
 		toTime := time.Date(date.Year(), date.Month(), date.Day(), hourTo, minuteTo, 59, date.Nanosecond(), date.Location())
 
 		if isInTimeRange(date.Time, fromTime, toTime) {
@@ -171,7 +171,6 @@ func isTollFreeDate(date time.Time, rules models.Rules) bool {
 		}
 	}
 	for _, w := range rules.WorkingDays {
-		fmt.Print(date.Weekday().String())
 		if strings.EqualFold(date.Weekday().String(), strings.ToLower(w)) {
 			return false
 		}

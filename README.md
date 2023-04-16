@@ -24,13 +24,15 @@ The application is modeled as a standard Golang microservice program using the r
 ##  Usage
 The provided `Makefile` will handle all the heavy lifting, and provide automated way to run the application. 
 It has the following commands:
+- `make generate`: will create mocks
+- `make test` : will execute defined tests in the project
 - `make build`: will create docker image for congestion calculator.
 - `make up`: will run all services defined in `docker-compose.yml`. It will also import example dataset under `data` directory to `MongoDB`
 - `make down`: will stop all services and cleanup. 
 - `make tools`: will download tooling binary used in application, and place them under `bin` folder.
 - `make lint`: will lint application using `golangci-lint` tool.
 
-Please make sure that Docker daemon is up and running.
+Please make sure that Docker daemon is up and running. In addition, before executing test please install tools by using provided `make tools` command.
 ### Postman Collection
 Example postman collection can be found under `docs` folder. It can be directly imported to Postman.
 

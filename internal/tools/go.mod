@@ -2,7 +2,10 @@ module github.com/otanfener/congestion-controller/internal/tools
 
 go 1.20
 
-require github.com/golangci/golangci-lint v1.52.2
+require (
+	github.com/golangci/golangci-lint v1.52.2
+	github.com/matryer/moq v0.3.1
+)
 
 require (
 	4d63.com/gocheckcompilerdirectives v1.2.1 // indirect
