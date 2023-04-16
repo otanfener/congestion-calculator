@@ -1,22 +1,16 @@
 # Congestion Tax Calculator
 
-In this project our aim is to write a program that calculates congestion tax based on the given [requirements](docs/ASSIGMENT.md)
+The aim of this project is to write a program that calculates congestion tax based on the given [requirements](docs/ASSIGMENT.md).
 ## Design
 ### Database Design
 
-MongoDB is selected as source of datastore for the simplicity and ease of use. Since MongoDB is a NoSQL database,
-database design in this application also centered around establishing NOSQL design paradigms. As seen from the image below, we
-modeled cities as one collection, and used city name as our primary access point through application.
-We flattened our data as much as possible by placing different properties such as tariffs, rules of a city together.
+MongoDB was chosen as the datastore for its simplicity and ease of use. As MongoDB is a NoSQL database, the database design for this application was based on establishing NoSQL design paradigms. As shown in the image below, we modeled cities as one collection and used the city name as our primary access point through the application. We flattened our data as much as possible by grouping different properties, such as tariffs and rules of a city, together.
 
 ![design.png](docs%2Fdesign.png)
 
-In addition to above diagram, example data under `data` folder can also give idea about the structure.
-
+In addition to the diagram above, the example dataset under the `data` folder can also provide an idea about the structure.
 ### Application Design
-
-Application modeled as standard Golang microservice program using repository pattern. With this pattern, we can easily use
-any other database implementation in the future if we want to.
+The application is modeled as a standard Golang microservice program using the repository pattern. With this pattern, we can easily use any other database implementation in the future if we want to.
 ## Prerequisites 
 - `make` 
   - Mac OS: `brew install make`
