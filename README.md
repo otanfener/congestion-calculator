@@ -32,7 +32,11 @@ It has the following commands:
 - `make tools`: will download tooling binary used in application, and place them under `bin` folder.
 - `make lint`: will lint application using `golangci-lint` tool.
 
-Please make sure that Docker daemon is up and running. In addition, before executing test please install tools by using provided `make tools` command.
+Please make sure that Docker daemon is up and running. 
+
+In addition, before executing test please install tools by using provided `make tools` command. In order, tools to installed in project `bin` folder
+we need to export `GOBIN` path. To do that run the following in your shell:
+- `export GOBIN=$PWD/bin`
 ### Postman Collection
 Example postman collection can be found under `docs` folder. It can be directly imported to Postman.
 
