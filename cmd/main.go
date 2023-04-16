@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/otanfener/congestion-controller/app"
 	"github.com/otanfener/congestion-controller/config"
 	"github.com/otanfener/congestion-controller/pkg/db"
@@ -10,6 +11,8 @@ import (
 	"github.com/rs/zerolog/log"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 	"time"
 )
 
@@ -45,8 +48,24 @@ func main() {
 		ReadTimeout:  defaultReadTimeout,
 		WriteTimeout: defaultWriteTimeout,
 	}
-	zlog.Info().Msgf("starting server on %s", cfg.Addr)
-	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		zlog.Error().Msg("failed to create http server")
+	errorChannel := make(chan error)
+	go func() {
+		zlog.Info().Msgf("starting server on %s", cfg.Addr)
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			zlog.Error().Msg("failed to create http server")
+			errorChannel <- fmt.Errorf("failed to create http server: %s", err)
+		}
+	}()
+	// Capture interrupts.
+	go func() {
+		c := make(chan os.Signal, 1)
+		signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
+		errorChannel <- fmt.Errorf("got signal: %s", <-c)
+	}()
+
+	// Wait for any error.
+	if err := <-errorChannel; err != nil {
+		zlog.Error().Msgf("received error: %s", err)
+		os.Exit(1)
 	}
 }

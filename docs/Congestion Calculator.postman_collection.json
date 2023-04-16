@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "129ac713-f682-4c77-b4fa-4e21b7fc8385",
+		"name": "Congestion Calculator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15526496"
+	},
+	"item": [
+		{
+			"name": "Example 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"city\": \"Stockholm\",\n    \"vehicle_type\": \"car\",\n    \"times\": [\n    \"2013-01-14 21:00:00\",\n    \"2013-01-15 21:00:00\",\n    \"2013-02-07 06:23:27\",\n    \"2013-02-07 15:27:00\",\n    \"2013-02-08 06:27:00\",\n    \"2013-02-08 06:20:27\",\n    \"2013-02-08 14:35:00\",\n    \"2013-02-08 15:29:00\",\n    \"2013-02-08 15:47:00\",\n    \"2013-02-08 16:01:00\",\n    \"2013-02-08 16:48:00\",\n    \"2013-02-08 17:49:00\",\n    \"2013-02-08 18:29:00\",\n    \"2013-02-08 18:35:00\",\n    \"2013-03-26 14:25:00\",\n    \"2013-03-28 14:07:27\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/congestion",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"congestion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Example 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"city\": \"Gothenburg\",\n    \"vehicle_type\": \"car\",\n    \"times\": [\n    \"2013-05-18 16:00:00\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/congestion",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"congestion"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,7 +1,7 @@
 version: '3.9'
 services:
-  mongo:
-    image: mongo
+  mongodb:
+    image: mongo:latest
     ports:
       - '27017:27017'
     environment:
@@ -9,4 +9,24 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: admin
       MONGO_INITDB_DATABASE: volvo
     volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./data/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - mongo_data:/data/db
+  mongo_seed:
+    image: mongo:latest
+    links:
+      - mongodb
+    volumes:
+      - ./data:/mongo_seed
+    command:
+      - ./mongo_seed/import.sh
+  congestion:
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+
+volumes:
+  mongo_data:

@@ -10,7 +10,6 @@ type DB struct {
 	*mongo.Database
 }
 
-// mongodb://congestion:congestion@localhost:27017/volvo
 func New(cfg Config) (*DB, error) {
 
 	client, err := mongo.NewClient(options.Client().ApplyURI(cfg.URI))
