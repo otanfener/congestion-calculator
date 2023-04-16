@@ -6,7 +6,7 @@ For assumptions and questions made during the scope of this project please see [
 ## Design
 ### Database Design
 
-MongoDB was chosen as the datastore for its simplicity and ease of use. As MongoDB is a NoSQL database, the database design for this application was based on establishing NoSQL design paradigms. As shown in the image below, we modeled cities as one collection and used the city name as our primary access point through the application. We flattened our data as much as possible by grouping different properties, such as tariffs and rules of a city, together.
+MongoDB was chosen as the datastore for its simplicity and ease of use. As MongoDB is a NoSQL database, the database design for this application was based on establishing NoSQL design paradigms. As shown in the image below, we modeled cities as one collection and used the city name as our primary access point through the application. We flattened our data as much as possible by grouping different properties, such as tariffs and rules of a city, together. With this design, we add any other city easily, and in addition we can also modify rules for a city as well.
 
 ![design.png](docs%2Fdesign.png)
 
