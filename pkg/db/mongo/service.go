@@ -1,4 +1,4 @@
-package db
+package mongo
 
 import (
 	"context"
@@ -6,11 +6,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-type DB struct {
+type Service struct {
 	*mongo.Database
 }
 
-func New(cfg Config) (*DB, error) {
+func New(cfg Config) (*Service, error) {
 
 	client, err := mongo.NewClient(options.Client().ApplyURI(cfg.URI))
 	if err != nil {
@@ -29,5 +29,5 @@ func New(cfg Config) (*DB, error) {
 	}
 
 	db := client.Database(cfg.Name)
-	return &DB{db}, nil
+	return &Service{db}, nil
 }

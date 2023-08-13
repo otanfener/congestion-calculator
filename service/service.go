@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/otanfener/congestion-controller/pkg/domain"
 	"github.com/otanfener/congestion-controller/pkg/models"
+	"github.com/otanfener/congestion-controller/repos"
 	"sort"
 	"strconv"
 	"strings"
@@ -11,15 +12,10 @@ import (
 )
 
 type Service struct {
-	repo Repo
+	repo repos.Repo
 }
 
-//go:generate moq -out repo_mock.go . Repo
-type Repo interface {
-	GetCity(ctx context.Context, city string) (models.City, error)
-}
-
-func New(repo Repo) *Service {
+func New(repo repos.Repo) *Service {
 	srv := &Service{
 		repo: repo,
 	}

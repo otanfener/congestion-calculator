@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/otanfener/congestion-controller/app"
 	"github.com/otanfener/congestion-controller/config"
-	"github.com/otanfener/congestion-controller/pkg/db"
-	"github.com/otanfener/congestion-controller/repos"
+	"github.com/otanfener/congestion-controller/pkg/db/mongo"
+	mongodb "github.com/otanfener/congestion-controller/repos/mongo"
 	"github.com/otanfener/congestion-controller/service"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -29,13 +29,13 @@ func main() {
 		return
 	}
 	zlog := zerolog.New(os.Stdout)
-	database, err := db.New(cfg.DB)
+	database, err := mongo.New(cfg.DB)
 	if err != nil {
 		log.Error().Msg("failed to create db connection")
 		return
 	}
 
-	r := repos.New(database, cfg.DB.Collection)
+	r := mongodb.New(database, cfg.DB.Collection)
 
 	var opts []app.Option
 	{

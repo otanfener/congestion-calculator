@@ -1,4 +1,4 @@
-package db
+package mongo
 
 type Config struct {
 	URI        string `required:"true"`

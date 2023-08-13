@@ -3,13 +3,14 @@ package service
 import (
 	"context"
 	"github.com/otanfener/congestion-controller/pkg/models"
+	"github.com/otanfener/congestion-controller/repos"
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
 )
 
 func TestCalculateTax(t *testing.T) {
-	mockRepo := &RepoMock{
+	mockRepo := &repos.RepoMock{
 		GetCityFunc: func(ctx context.Context, city string) (models.City, error) {
 			return models.City{
 				Name: "Stockholm",
